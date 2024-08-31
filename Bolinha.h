@@ -10,67 +10,23 @@ class Bolinha {
         int x, y;
         int raio;
         int cor;
-        void Atualiza_Tela(char mapa[10][50]){
-            system("clear");
-            for (int i = 0; i < 10; i++){
-                for (int j = 0; j < 50; j++){
-                    cout << mapa[i][j];
-                }
-                cout << endl;
-            }
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        }
+    
+        char (*mapa)[50];
     
     public:
-        Bolinha(char mapa[10][50] ,int width, int height){
-            x=width/2;
-            y=height/2;
-            mapa[x][y]='O';
-            
-        }
+        enum VetoresMovimento {CIMA_DIR, BAIXO_DIR, MEIO_DIR, CIMA_ESQ, BAIXO_ESQ, MEIO_ESQ  };
+
+        Bolinha(char _mapa[10][50] ,int width, int height);
+        //escaneia a lateral da bolinha e vê se tem player , ou borda de mapa
+        
         char colisao(char* tabuleiro, int x, int y);
 
-        void mover(char mapa[10][50], char dir  ){
-            Atualiza_Tela(mapa);
-
-            switch (dir){
-                case 'D':
-                    if (y+1>49){
-                        mover(mapa,'E');
-                        return;
-                    }
-                    y++;
-                    mapa[x][y] = 'E';
-                    mapa[x][y-1] = ' ';
-                    break;
-                case 'E':
-                    if (y-1<0){
-                        mover(mapa,'D');
-                        return;
-                    }
-                    y--;
-                    mapa[x][y+1] = ' ';
-                    mapa[x][y] = 'E';
-                    mover(mapa,'E');
-                    break;
-
-                case 'C':
-                    if (y+1>49){
-                        mover(mapa,'E');
-                        return;
-                    }
-                    y++;
-                    mapa[x][y] = 'E';
-                    mapa[x][y-1] = ' ';
-                    break;
-                default:
-                    break;
-                }
-                
-                
-            }
+        //move a bolinha, nos vetores dados acima, 
+        //caso ela colida com o teto
+        //moverá para o vetor inverso, cima_Dir move pra baixo dir
+        //caso ela colida com um player, randomiza um vetor de saida 
+        void mover(VetoresMovimento vet);
         
 };
 
-using namespace std;
 #endif // BOLINHA_h
