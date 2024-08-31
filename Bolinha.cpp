@@ -1,6 +1,8 @@
 #include "Bolinha.h"
 #include "Tela.h"
 Bolinha::Bolinha(char _mapa[10][50] ,int width, int height){
+        Inicializa_Tela(mapa);
+
     x=width/2;
     y=height/2;  
     mapa = _mapa;
