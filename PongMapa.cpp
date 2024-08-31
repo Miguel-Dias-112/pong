@@ -1,4 +1,5 @@
 #include "PongMapa.h"
+#include "Player.h"
 #include "Bolinha.h"
 PongMapa::PongMapa()
 {
@@ -7,7 +8,19 @@ PongMapa::PongMapa()
                 mapa[i][j] = ' ';
         }
     }
-    bolinha = new Bolinha(mapa, 10, 50);
+    Bolinha* bolinha = new Bolinha(mapa, 10, 50);
+    Player* player = new Player(mapa, 5, 0, 'w', 's');
+        Player* player2 = new Player(mapa, 5, 49, 'o', 'l');
+
+     while (true){
+        bolinha->mover();
+                player2->delizar();
+
+        player->delizar();
+
+     }
+        
+
 }
 
 PongMapa::~PongMapa()

@@ -12,7 +12,6 @@ class PongMapa
 {
 private:
     char mapa[10][50];
-    Bolinha *bolinha;
     
 public:
    
