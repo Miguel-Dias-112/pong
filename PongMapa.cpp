@@ -1,6 +1,7 @@
 #include "PongMapa.h"
 #include "Player.h"
 #include "Bolinha.h"
+#include "Tela.h"
 PongMapa::PongMapa()
 {
     for (int i = 0; i < 10; i++){
@@ -14,9 +15,10 @@ PongMapa::PongMapa()
 
      while (true){
         bolinha->mover();
-                player2->delizar();
+        char c = getch();
+        player2->delizar(c);
 
-        player->delizar();
+        player->delizar(c);
 
      }
         

@@ -20,25 +20,25 @@ void Player::desenhar(){
     mapa[x-1][y]='x';
 }
 void Player::apagar(){
+    
     mapa[x][y]=' ';
     mapa[x+1][y]=' ';
     mapa[x-1][y]=' ';
 }
-void Player::delizar(){
-    char c;
-
-   
-    c = getch();
-    if (x+1>9 || x-1<0){
-        return;
-    }
+void Player::delizar(char c){
     if (c == upKEY){
+        if(!(x+1<9)){
+            return;
+        }
         apagar();
         x++;
         desenhar();
         return;
     }
      if (c == downKEY){
+        if(!(x-1>0)){
+            return;
+        }
         apagar();
         x--;
         desenhar();

@@ -16,7 +16,7 @@ class Player {
     public:
 
         Player(char _mapa[10][50],int posx, int posy, char upKEY, char downKEY);
-        void delizar();
+        void delizar(char c);
         
         
         

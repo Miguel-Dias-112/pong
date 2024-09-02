@@ -5,18 +5,41 @@ Bolinha::Bolinha(char _mapa[10][50] ,int width, int height){
 
     x=width/2;
     y=height/2;  
-    ultimoVetor = CIMA_DIR;
+    ultimoVetor = MEIO_DIR;
     mapa = _mapa;
     mapa[x][y]='O';
     mover();
 }
+void Bolinha::escaneiaRedor(){
+
+    if ( mapa[x][y+1] == 'x' ){
+        ultimoVetor = MEIO_ESQ;
+        return;
+    }
+    if ( mapa[x][y-1] == 'x' ){
+        ultimoVetor = MEIO_DIR;
+        return;
+    }
+    
+}
+   
+   
+    
 void Bolinha::mover(){
     Atualiza_Tela(mapa);
+    escaneiaRedor();
 
     switch (ultimoVetor){
+        case RESET:
+            mapa[x][y] = ' ';
+            x=5;
+            y=25;
+            mapa[x][y] = 'O';
+            ultimoVetor= MEIO_DIR;
+            break;
         case MEIO_DIR:
-            if (y+1>49){
-                ultimoVetor=MEIO_ESQ;
+            if (y==50){
+                ultimoVetor=RESET;
                 return;
             }
             y++;
@@ -25,8 +48,8 @@ void Bolinha::mover(){
             ultimoVetor= MEIO_DIR;
             break;
         case MEIO_ESQ:
-            if (y-1<0){
-                ultimoVetor= MEIO_DIR;
+            if (y==1    ){
+                ultimoVetor= RESET;
                 return;
             }
             y--;
@@ -38,7 +61,7 @@ void Bolinha::mover(){
 
         case BAIXO_DIR:
             if (x+1>=10  ||  y+1>=50){ 
-                ultimoVetor= CIMA_DIR;
+                ultimoVetor= RESET;
                 return;
             }
             x++;
@@ -48,8 +71,8 @@ void Bolinha::mover(){
             ultimoVetor= BAIXO_DIR;
             break;
          case CIMA_DIR:
-            if (x-1<0|| y+1>=50){
-                ultimoVetor= BAIXO_DIR;
+            if (x-1<=0|| y+1>=50){
+                ultimoVetor= RESET;
                 return;
             }
             x--;
@@ -61,7 +84,7 @@ void Bolinha::mover(){
 
          case BAIXO_ESQ:
             if (x+1>=10  ||  y-1<=0){ 
-                ultimoVetor= CIMA_ESQ;
+                ultimoVetor= RESET;
                 return;
             }
             x++;
@@ -72,7 +95,7 @@ void Bolinha::mover(){
             break;
          case CIMA_ESQ:
             if (x-1<0 || y-1<=0){
-                ultimoVetor= BAIXO_ESQ;
+                ultimoVetor= RESET;
                 return;
             }
             x--;
